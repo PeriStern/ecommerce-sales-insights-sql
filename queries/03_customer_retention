@@ -1,0 +1,23 @@
+--Focus questions:
+--What percentage of customers placed only one order vs. multiple orders?
+--What's the average time between orders for repeat customers?
+--Which customers are your most loyal (number of orders and total spend)?
+
+--Customers -  CustomerID, CompanyName
+--Orders - OrderID, CustomerID, OrderDate
+--OrderDetails - OrderID, UnitPrice, Quantity
+
+--Count how many customers placed only one order:
+
+SELECT * 
+FROM Orders
+WHERE OrderID IN (
+    SELECT OrderID
+    FROM Orders
+    GROUP BY CustomerID
+    HAVING COUNT(OrderID) = 1
+);
+
+-- Every customer placed over 1 order
+--Were not dealing with one-time customers
+
